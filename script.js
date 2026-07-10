@@ -44,12 +44,12 @@ function playRound(){
         computerScore++;
     }
 }
-function playGame(times){
-    alert(`this is a rock, paper, scissors game make your choice first one to reach ${times} points win`);
-    while (humanScore < times && computerScore < times){
+function playGame(points){
+    alert(`this is a rock, paper, scissors game make your choice first one to reach ${points} points win`);
+    while (humanScore < points && computerScore < points){
         playRound();
     }
     alert(`your score is ${humanScore} \n
         computer score is ${computerScore}`);
 }
-playGame(3);
+playGame(5);
