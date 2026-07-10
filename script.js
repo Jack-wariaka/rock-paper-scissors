@@ -2,19 +2,12 @@ let humanScore = 0;
 let computerScore = 0;
 function getHumanChoice(){
     let choice;
-    alert('this is a rock paper, scissors game make your choice');
     choice = prompt('rock paper or scissors?');
-    if (choice) {
-        choice = choice.toLowerCase();
-    } else {
-        alert('please enter a valid choice')
-    }
-    let isValid;
-    isValid = choice === "rock" || choice === "paper" || choice === "scissors";
-    if (isValid) {
+    choice = choice.toLowerCase();
+    if (choice && (choice === "rock" || choice === "paper" || choice === "scissors")) {
         return choice;
-    } else{
-        alert("please enter a valid choice");
+    } else {
+        alert('invalid choice');
     }
 }
 
@@ -35,22 +28,26 @@ function getComputerChoice() {
 function playRound(){
     const computerChoice = getComputerChoice();
     const humanChoice = getHumanChoice();
+    const humanWin = (humanChoice === "paper" && computerChoice === "rock" ||
+                     humanChoice === "rock" && computerChoice === "scissors" ||
+                     humanChoice === "scissors" && computerChoice === "paper");
+    const computerWins = (humanChoice === "paper" && computerChoice === "scissors" ||
+                     humanChoice === "rock" && computerChoice === "paper" ||
+                     humanChoice === "scissors" && computerChoice === "rock");
     if (humanChoice === computerChoice) {
         alert(`its a tie you both chose ${humanChoice}`);
-    } else if (humanChoice === "rock" && computerChoice === "scissors" |
-               humanChoice === "paper" && computerChoice === "rock" |
-               humanChoice === "scissors" && computerChoice === "paper"){
-                alert(`you win! ${humanChoice} beats ${computerChoice}`);
-                humanScore++;
-               }else {
-                alert(`computer wins ${computerChoice} beats ${humanChoice}`);
-                computerScore++;
-               }
+    }else if (humanWin){
+        alert(`you win ${humanChoice} beats ${computerChoice}`);
+        humanScore++;
+    }else if (computerWins) {
+        alert(`computer wins ${computerChoice} beats ${humanChoice}`);
+        computerScore++;
+    }
 }
 function playGame(times){
-    while (times > 0){
+    alert(`this is a rock, paper, scissors game make your choice first one to reach ${times} points win`);
+    while (humanScore < times && computerScore < times){
         playRound();
-        times--;
     }
     alert(`your score is ${humanScore} \n
         computer score is ${computerScore}`);
